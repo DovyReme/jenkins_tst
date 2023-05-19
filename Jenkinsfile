@@ -1,21 +1,23 @@
 pipeline {
     agent {
-            label 'ubuntu'
+        label 'ubuntu'
     }
 
     stages {
         stage('Build') {
             steps {
-                // Install Apache web server dependencies
-                sh 'sudo apt update'
-                sh 'sudo apt install -y apache2'
+                // Update package lists
+                sh 'apt update'
+
+                // Install Apache web server
+                sh 'apt install -y apache2'
             }
         }
 
         stage('Start Apache') {
             steps {
                 // Start Apache web server
-                sh 'sudo systemctl start apache2'
+                sh 'systemctl start apache2'
             }
         }
     }
